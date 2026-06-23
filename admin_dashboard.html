@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fb;
+    margin: 20px;
+}
+
+/* ✅ CENTER ALL HEADINGS */
+h2, h3 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+/* ✅ FORM STYLING */
+form {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    width: 350px;
+    margin: auto; /* center form */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+input, select {
+    width: 90%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* ✅ TABLE STYLING */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+th {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+}
+
+td {
+    padding: 10px;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e6f2ff;
+}
+
+/* ✅ APPROVE BUTTON */
+a {
+    text-decoration: none;
+    color: white;
+    background: #27ae60;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+a:hover {
+    background: #219150;
+}
+
+hr {
+    margin: 25px 0;
+}
+
+    </style>
+
+</head>
+<body>
+
+<h2>Admin Dashboard</h2>
+
+<h3>Create Trek</h3>
+
+<form action="/create_trek" method="POST">
+    <input type="text" name="name" placeholder="Trek Name" required><br><br>
+    <input type="text" name="location" placeholder="Location" required><br><br>
+    <input type="text" name="difficulty" placeholder="Difficulty" required><br><br>
+    <input type="number" name="duration" placeholder="Duration" required><br><br>
+    <input type="number" name="slots" placeholder="Slots" required><br><br>
+    <button type="submit">Create Trek</button>
+</form>
+
+<hr>
+
+<h3>All Treks</h3>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Difficulty</th>
+        <th>Duration</th>
+        <th>Slots</th>
+        <th>Status</th>
+    </tr>
+
+    {% for trek in treks %}
+    <tr>
+        <td>{{ trek.id }}</td>
+        <td>{{ trek.name }}</td>
+        <td>{{ trek.location }}</td>
+        <td>{{ trek.difficulty }}</td>
+        <td>{{ trek.duration }}</td>
+        <td>{{ trek.slots }}</td>
+        <td>{{ trek.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<hr>
+
+<h3>Booking Details</h3>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>User</th>
+        <th>Trek</th>
+        <th>Date</th>
+        <th>Status</th>
+    </tr>
+
+    {% for b in bookings %}
+    <tr>
+        <td>{{ b.id }}</td>
+        <td>{{ b.user_name }}</td>
+        <td>{{ b.trek_name }}</td>
+        <td>{{ b.booking_date }}</td>
+        <td>{{ b.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<hr>
+
+<h3>Pending Staff Approval</h3>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Action</th>
+    </tr>
+
+    {% for s in pending_staff %}
+    <tr>
+        <td>{{ s.id }}</td>
+        <td>{{ s.name }}</td>
+        <td>{{ s.email }}</td>
+        <td>
+            <a href="/approve_staff/{{ s.id }}">Approve</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<hr>
+
+<h3>Assign Staff to Trek</h3>
+
+<form action="/assign_staff" method="POST">
+    <label>Select Trek:</label>
+    <select name="trek_id">
+        {% for trek in treks %}
+            <option value="{{ trek.id }}">{{ trek.name }}</option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <label>Select Staff:</label>
+    <select name="staff_id">
+        {% for staff in staff_list %}
+            <option value="{{ staff.id }}">{{ staff.name }}</option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <button type="submit">Assign Staff</button>
+</form>
+
+<hr>
+
+<h3>All Treks (With Staff)</h3>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Difficulty</th>
+        <th>Slots</th>
+        <th>Status</th>
+        <th>Assigned Staff</th>
+    </tr>
+
+    {% for trek in treks %}
+    <tr>
+        <td>{{ trek.id }}</td>
+        <td>{{ trek.name }}</td>
+        <td>{{ trek.location }}</td>
+        <td>{{ trek.difficulty }}</td>
+        <td>{{ trek.slots }}</td>
+        <td>{{ trek.status }}</td>
+        <td>
+            {% if trek.staff_name %}
+                {{ trek.staff_name }}
+            {% else %}
+                Not Assigned
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

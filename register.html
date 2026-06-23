@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fb;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ✅ Center heading */
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-top: 40px;
+        }
+
+        /* ✅ Form Card */
+        form {
+            background: white;
+            width: 320px;
+            padding: 20px;
+            margin: 30px auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* ✅ Inputs */
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* ✅ Button */
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+
+</head>
+<body>
+
+<h2>Register</h2>
+
+<form method="POST">
+    <input name="name" placeholder="Name" required><br><br>
+
+    <input name="email" placeholder="Email" required><br><br>
+
+    <input name="password" type="password" placeholder="Password" required><br><br>
+
+    <select name="role">
+        <option value="user">User</option>
+        <option value="staff">Staff</option>
+    </select><br><br>
+
+    <button type="submit">Register</button>
+</form>
+
+</body>
+</html>

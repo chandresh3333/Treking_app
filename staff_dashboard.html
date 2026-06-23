@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Staff Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fb;
+            margin: 20px;
+        }
+
+        /* ✅ Center Headings */
+        h2, h3 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        /* ✅ Table Styling */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e6f2ff;
+        }
+
+        /* ✅ Form Styling */
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 350px;
+            margin: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        input, select {
+            width: 90%;
+            padding: 8px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        hr {
+            margin: 25px 0;
+        }
+    </style>
+
+</head>
+<body>
+
+<h2>Staff Dashboard</h2>
+
+<!-- ✅ ASSIGNED TREKS -->
+<h3>My Treks</h3>
+
+<table border="1">
+    <tr>
+        <th>Trek</th>
+        <th>Location</th>
+        <th>Slots</th>
+    </tr>
+
+    {% for trek in treks %}
+    <tr>
+        <td>{{ trek.name }}</td>
+        <td>{{ trek.location }}</td>
+        <td>{{ trek.slots }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<hr>
+
+<!-- ✅ USER LIST -->
+<h3>Users in My Treks</h3>
+
+<table border="1">
+    <tr>
+        <th>Booking ID</th>
+        <th>User Name</th>
+        <th>Trek</th>
+        <th>Date</th>
+        <th>Status</th>
+    </tr>
+
+    {% for b in bookings %}
+    <tr>
+        <td>{{ b.id }}</td>
+        <td>{{ b.user_name }}</td>
+        <td>{{ b.trek_name }}</td>
+        <td>{{ b.booking_date }}</td>
+        <td>{{ b.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<hr>
+
+<!-- ✅ UPDATE TREK -->
+<h3>Update Trek</h3>
+
+<form action="/update_trek" method="POST">
+
+    <label>Select Trek:</label>
+    <select name="trek_id">
+        {% for trek in treks %}
+            <option value="{{ trek.id }}">{{ trek.name }}</option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <label>Slots:</label>
+    <input type="number" name="slots" required>
+
+    <br><br>
+
+    <label>Status:</label>
+    <select name="status">
+        <option value="open">Open</option>
+        <option value="closed">Closed</option>
+        <option value="completed">Completed</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Update Trek</button>
+
+</form>
+
+</body>
+</html>

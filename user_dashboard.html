@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fb;
+            margin: 20px;
+        }
+
+        /* ✅ Center headings */
+        h2, h3 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        /* ✅ Table styling */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e6f2ff;
+        }
+
+        /* ✅ Book button */
+        a {
+            text-decoration: none;
+            color: white;
+            background: #27ae60;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        a:hover {
+            background: #219150;
+        }
+
+        hr {
+            margin: 25px 0;
+        }
+    </style>
+
+</head>
+<body>
+
+<h2>User Dashboard</h2>
+
+<!-- ✅ AVAILABLE TREKS -->
+<h3>Available Treks</h3>
+
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Slots</th>
+        <th>Action</th>
+    </tr>
+
+    {% for trek in treks %}
+    <tr>
+        <td>{{ trek.name }}</td>
+        <td>{{ trek.location }}</td>
+        <td>{{ trek.slots }}</td>
+        <td>
+            <a href="/book/{{ trek.id }}">Book</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<hr>
+
+<!-- ✅ USER BOOKINGS -->
+<h3>My Bookings</h3>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Trek</th>
+        <th>Date</th>
+        <th>Status</th>
+    </tr>
+
+    {% for b in bookings %}
+    <tr>
+        <td>{{ b.id }}</td>
+        <td>{{ b.trek_name }}</td>
+        <td>{{ b.booking_date }}</td>
+        <td>{{ b.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
