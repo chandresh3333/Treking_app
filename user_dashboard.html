@@ -68,7 +68,41 @@
 <body>
 
 <h2>User Dashboard</h2>
+<hr>
 
+<h3>My Profile</h3>
+
+<table border="1">
+
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Role</th>
+    <th>Action</th>
+</tr>
+
+<tr>
+    <td>{{ user.id }}</td>
+    <td>{{ user.name }}</td>
+    <td>{{ user.email }}</td>
+    <td>{{ user.role }}</td>
+
+    <td>
+    <form action="/edit_profile">
+        <button type="submit">
+                Update
+            </button>
+    </form>
+    </a>
+</td>
+</td>
+</tr>
+
+</table>
+
+<hr>
+<hr>
 <!-- ✅ AVAILABLE TREKS -->
 <h3>Available Treks</h3>
 
@@ -103,6 +137,7 @@
         <th>Trek</th>
         <th>Date</th>
         <th>Status</th>
+        <th>Action</th>
     </tr>
 
     {% for b in bookings %}
