@@ -96,10 +96,34 @@ hr {
     </style>
 
 </head>
-<body>
+<hr>
 
 <h2>Admin Dashboard</h2>
+<hr>
 
+
+<hr>
+
+
+<h3>Dashboard Statistics</h3>
+
+<table>
+    <tr>
+        <th>Total Treks</th>
+        <th>Total Users</th>
+        <th>Total Staffs</th>
+        <th>Total Bookings</th>
+    </tr>
+
+    <tr>
+        <td>{{ trek_count }}</td>
+        <td>{{ user_count }}</td>
+        <td>{{ staff_count }}</td>
+        <td>{{ booking_count }}</td>
+    </tr>
+</table>
+
+<hr>
 <h3>Create Trek</h3>
 
 <form action="/create_trek" method="POST">
@@ -111,6 +135,38 @@ hr {
     <button type="submit">Create Trek</button>
 </form>
 
+<hr>
+
+<h3>Update Trek</h3>
+
+<form action="/update_trek_add" method="POST">
+
+    <label>Select Trek:</label>
+    <select name="trek_id">
+        {% for trek in treks %}
+            <option value="{{ trek.id }}">{{ trek.name }}</option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <label>Slots:</label>
+    <input type="number" name="slots" required>
+
+    <br><br>
+
+    <label>Status:</label>
+    <select name="status">
+        <option value="open">Open</option>
+        <option value="closed">Closed</option>
+        <option value="completed">Completed</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Update Trek add</button>
+
+</form>
 <hr>
 
 <h3>All Treks</h3>
@@ -161,6 +217,29 @@ hr {
         <td>{{ b.status }}</td>
     </tr>
     {% endfor %}
+</table>
+
+<hr>
+
+<h3>User List</h3>
+
+<table>
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Status</th>
+</tr>
+
+{% for user in users %}
+<tr>
+    <td>{{ user.id }}</td>
+    <td>{{ user.name }}</td>
+    <td>{{ user.email }}</td>
+    <td>{{ user.status }}</td>
+</tr>
+{% endfor %}
+
 </table>
 
 <hr>
@@ -247,5 +326,59 @@ hr {
     {% endfor %}
 </table>
 
+<hr>
+<h3>Block User</h3>
+<form action="/block_user" method="POST">
+    <label>Select User :</label>
+
+    <select name="user_id">
+
+        {% for user in users %}
+            {% if user.role != 'admin' and user.status != 'blocked' %}
+            <option value="{{ user.id }}">
+                {{ user.id }} - {{ user.name }}
+            </option>
+            {% endif %}
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+    <button type="submit">
+        Block User
+    </button>
+
+</form>
+<hr>
+<h3>Unblock user </h3>
+<form action="/unblock_user" method="POST">
+    <label>Select User :</label>
+
+    <select name="user_id">
+
+    {% for user in users %}
+
+        {% if user.role != 'admin' and user.status == 'blocked' %}
+
+        <option value="{{ user.id }}">
+            {{ user.id }} - {{ user.name }} ({{ user.role }})
+        </option>
+
+        {% endif %}
+
+    {% endfor %}
+
+    </select>
+
+    <br><br>
+
+    <button type="submit">
+        Unblock User
+    </button>
+
+</form>
+
+</hr>
 </body>
 </html>
