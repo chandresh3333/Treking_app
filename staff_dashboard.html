@@ -164,6 +164,73 @@
     <button type="submit">Update Trek</button>
 
 </form>
+<hr>
+<h3>Users in My Treks</h3>
+
+<table border="1">
+
+<tr>
+    <th>Booking ID</th>
+    <th>User Name</th>
+    <th>Trek</th>
+    <th>Date</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+
+{% for b in bookings %}
+
+<tr>
+
+    <td>{{ b.id }}</td>
+    <td>{{ b.user_name }}</td>
+    <td>{{ b.trek_name }}</td>
+    <td>{{ b.booking_date }}</td>
+    <td>{{ b.status }}</td>
+
+    <td>
+
+        <form action="/update_participant" method="POST">
+
+            <input
+                type="hidden"
+                name="booking_id"
+                value="{{ b.id }}">
+
+            <select name="status">
+
+                <option value="booked">
+                    Booked
+                </option>
+
+                <option value="attended">
+                    Attended
+                </option>
+
+                <option value="completed">
+                    Completed
+                </option>
+
+                <option value="cancelled">
+                    Cancelled
+                </option>
+
+            </select>
+
+            <button type="submit">
+                Update
+            </button>
+
+        </form>
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
 
 </body>
 </html>
