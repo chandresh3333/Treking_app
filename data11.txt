@@ -1,0 +1,446 @@
+Rajesh rajesh1@gmail.com Rajesh@123 Staff
+anuj anuj21@gmail.com  Anuj@123 User
+Dinesh dinesh3@gmail.com Dinesh@123 Staff
+Om om33@gmail.com Om@123 Staff
+Karan karan7@gmail.com Karan@123 User
+
+
+
+
+  Trekking Management Application Project Report
+Student Name: Chandresh Bhandari
+Course: Modern Application Development I (MAD-I)
+Project Title: Trekking Management Application
+Submission Date: July 2026
+1. Project Details
+Project Title
+Trekking Management Application
+Problem Statement
+Adventure organizations often manage trekking activities through spreadsheets, phone calls, and manual coordination. These traditional approaches create several challenges:
+Difficulty managing trek registrations
+Overbooking of trekking slots
+Lack of proper staff assignment
+No centralized booking history
+Limited visibility of trek status
+Time-consuming administrative work
+The objective of this project is to develop a web-based Trekking Management Application that enables efficient management of trekking activities through role-based access for Admin, Trek Staff, and Users.
+2. Approach to the Problem Statement
+The application was developed using the Flask framework with SQLite as the backend database.
+The system follows a role-based architecture where:
+Admin
+Manages treks
+Approves staff
+Assigns staff to treks
+Blacklists users/staff
+Monitors bookings and statistics
+Trek Staff
+Registers and waits for approval
+Views assigned treks
+Updates trek status and slots
+Manages participant lists
+Users
+Register and login
+Search treks
+Book treks
+View booking history
+Update profile information
+The application ensures:
+Prevention of overbooking
+Staff access restrictions
+Booking only for open treks
+Historical tracking of trekking activities
+3. Frameworks and Libraries Used
+Backend
+Flask
+Jinja2
+Frontend
+HTML5
+CSS3
+Bootstrap 5
+Database
+SQLite
+Python Libraries
+sqlite3
+datetime
+werkzeug.security
+Flask session management
+4. System Architecture
+ 
+ 
+ 
+ 
+Plain Text
+1
+                +----------------+
+2
+                |     Admin      |
+3
+                +--------+-------+
+4
+                         |
+5
+                         |
+6
+                 Manage Treks
+7
+                 Manage Users
+8
+                 Manage Staff
+9
+                         |
+10
+                         v
+11
+12
++--------+      +------------------+      +--------+
+13
+| Users  |----->| Flask Application|<-----| Staff  |
+14
++--------+      +------------------+      +--------+
+15
+                         |
+16
+                         |
+17
+                         v
+18
+19
+                +----------------+
+20
+                | SQLite Database|
+21
+                +----------------+
+Show more lines
+5. Database Design (ER Diagram)
+Users Table
+Field	Type
+id	INTEGER PK
+name	TEXT
+email	TEXT
+password	TEXT
+role	TEXT
+status	TEXT
+Treks Table
+Field	Type
+id	INTEGER PK
+trek_name	TEXT
+location	TEXT
+difficulty	TEXT
+duration	INTEGER
+slots	INTEGER
+staff_id	INTEGER
+status	TEXT
+start_date	DATE
+end_date	DATE
+Bookings Table
+Field	Type
+id	INTEGER PK
+user_id	INTEGER
+trek_id	INTEGER
+booking_date	DATE
+status	TEXT
+ER Diagram
+ 
+ 
+ 
+ 
+Plain Text
+1
+Users
+2
+  |
+3
+  | 1
+4
+  |
+5
+  | M
+6
+Bookings
+7
+  |
+8
+  | M
+9
+  |
+10
+  | 1
+11
+Treks
+12
+13
+Treks
+14
+  |
+15
+  | M
+16
+  |
+17
+  | 1
+18
+Staff (Users Table)
+Show more lines
+6. Authentication Module
+Features
+User Registration
+New trekkers can register.
+Credentials stored securely.
+Staff Registration
+Staff can register.
+Requires Admin approval before dashboard access.
+Login System
+Separate login based on role.
+Session-based authentication.
+Admin Account
+Pre-created in database.
+Cannot register through application.
+7. Admin Functionalities
+Dashboard Statistics
+The Admin dashboard displays:
+Total Treks
+Total Users
+Total Staff Members
+Total Bookings
+Trek Management
+Admin can:
+Add Trek
+Edit Trek
+Delete Trek
+View Trek Details
+Staff Management
+Admin can:
+View Staff Requests
+Approve Staff
+Reject Staff
+Assign Staff to Trek
+User Management
+Admin can:
+View Users
+Search Users
+Blacklist Users
+Blacklist Functionality
+Admin can blacklist:
+Users
+Staff Members
+Blacklisted accounts are unable to access system functionalities.
+Search Functionality
+Admin can search:
+Users by Name or ID
+Staff by Name or ID
+Treks by Name or ID
+8. Trek Staff Functionalities
+Approved Staff Dashboard
+Displays:
+Assigned Treks
+Registration Count per Trek
+Trek Status
+Trek Management
+Staff can:
+Update Available Slots
+Change Trek Status
+Open
+Closed
+Started
+Completed
+Participant Management
+Staff can:
+View Participant List
+Monitor Bookings
+Track Trek Registrations
+9. User Functionalities
+User Dashboard
+Displays:
+Available Treks
+Booked Treks
+Trek Status
+Trek History
+Trek Search
+Users can search treks by:
+Trek Name
+Location
+Difficulty Level
+Trek Booking
+Users can:
+Book Available Treks
+Cancel Bookings
+Profile Management
+Users can:
+View Profile
+Edit Profile Information
+Trek History
+Users can view:
+Past Treks
+Completed Treks
+Cancelled Bookings
+10. Core Business Rules
+Overbooking Prevention
+System checks available slots before confirming booking.
+ 
+ 
+ 
+ 
+Plain Text
+1
+Available Slots > 0
+2
+       ↓
+3
+Allow Booking
+4
+5
+Available Slots = 0
+6
+       ↓
+7
+Booking Rejected
+Show more lines
+Trek Status Validation
+Users can only book if:
+ 
+ 
+ 
+ 
+Plain Text
+1
+Status = Open
+Show more lines
+Otherwise booking is denied.
+Staff Access Validation
+Only assigned staff can:
+Modify trek details
+View participant information
+11. Additional Features Implemented
+Admin Statistics Dashboard
+Total Treks
+Total Users
+Total Staff
+Total Bookings
+User Search Feature
+Search users by name
+Trek Search Feature
+Search trekking events
+Profile Editing
+User profile update functionality
+Blacklisting Module
+User and staff blocking system
+Participant Tracking
+Staff can view trek participants
+12. Application Screens
+Login Page
+Features:
+Login
+Navigation
+Error handling
+Registration Page
+Features:
+User Registration
+Staff Registration
+Admin Dashboard
+Features:
+Statistics
+User Management
+Staff Approval
+Trek Management
+Staff Dashboard
+Features:
+Assigned Treks
+Participants
+Trek Updates
+User Dashboard
+Features:
+Trek Search
+Trek Booking
+Trek History
+Profile Management
+13. API Resources (If Implemented)
+Examples:
+ 
+ 
+ 
+ 
+Plain Text
+1
+GET    /treks
+2
+GET    /users
+3
+GET    /bookings
+4
+POST   /book_trek
+5
+POST   /add_trek
+6
+POST   /approve_staff
+Show more lines
+These endpoints can return JSON data for integration purposes.
+14. Testing Performed
+Test Cases
+✅ User Registration
+✅ Staff Registration
+✅ Staff Approval
+✅ Login Authentication
+✅ Create Trek
+✅ Edit Trek
+✅ Delete Trek
+✅ Search Trek
+✅ Search User
+✅ Book Trek
+✅ Prevent Overbooking
+✅ Blacklist User
+✅ Assign Staff
+✅ View History
+15. AI / LLM Declaration
+AI tools were used for:
+Code assistance
+Debugging support
+HTML/CSS improvement
+Flask route development
+Project documentation generation
+The project design, implementation, testing, database creation, integration, and understanding of functionality were completed and verified by the student.
+16. Conclusion
+The Trekking Management Application successfully provides a centralized platform for managing trekking activities. The project achieves all major requirements specified in the problem statement, including authentication, trek management, staff approval, booking management, search functionality, profile management, and role-based access control.
+The application improves operational efficiency, reduces manual work, prevents overbooking, and offers a user-friendly experience for administrators, trekking staff, and trekkers.
+Drive Link for Presentation Video
+ 
+ 
+ 
+ 
+Plain Text
+1
+(Add your Google Drive Video Link Here)
+Show more lines
+GitHub / Source Code Link (Optional)
+ 
+ 
+ 
+ 
+Plain Text
+1
+(Add Repository Link Here)
+Show more lines
+Provide your feedback on BizChat
+ 
+ 
+You said:
+make a word file
+Copilot said:
+The generated "Trekking_Management_Project_Report.docx" file was saved to OneDrive.
+Coding and executing
+Coding and executing
+I've created the Word document:
+📄 Trekking Management Project Report
+Note: This is a concise report version. For academic submission (up to 5 pages as per the guidelines), I can also generate a full professional report with:
+Cover page
+Student details section
+Complete problem statement
+Detailed approach
+ER Diagram
+Database schema tables
+System architecture
+Feature screenshots placeholders
+API endpoints
+Testing report
+AI/LLM declaration
+Conclusion
+which will look much better during evaluation and viva.
