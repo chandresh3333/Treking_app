@@ -1,0 +1,219 @@
+Trekking Management Application Project Report
+
+Student Name: Chandresh Bhandari
+Course: Modern Application Development I (MAD-I)
+Project Title: Trekking Management Application
+Submission Date: July 2026
+
+Project Title
+Trekking Management Application
+
+Problem Statement
+Adventure organizations often rely on spreadsheets, phone calls, and manual coordination to manage trekking activities. These traditional methods lead to:
+
+Difficulty managing trek registrations
+
+Overbooking of trekking slots
+
+Lack of proper staff assignment
+
+No centralized booking history
+
+Limited visibility of trek status
+
+Time-consuming administrative work
+
+Objective: To develop a web-based Trekking Management Application that enables efficient management of trekking activities through role-based access for Admin, Trek Staff, and Users.
+
+Approach
+The application was developed using Flask framework with SQLite as the backend database. Jinja2 templating, HTML, CSS, and Bootstrap were used for the frontend.
+
+Role-based architecture:
+
+Admin: Manages treks, approves staff, assigns staff, blacklists users/staff, monitors bookings.
+
+Trek Staff: Registers, waits for approval, views assigned treks, updates trek status and slots, manages participants.
+
+Users: Register, login, search treks, book treks, view booking history, update profile.
+
+Business rules enforced:
+
+Prevention of overbooking
+
+Staff access restrictions
+
+Booking only for open treks
+
+Historical tracking of trekking activities
+
+Frameworks and Libraries
+Backend: Flask, Jinja2
+Frontend: HTML5, CSS3, Bootstrap 5
+Database: SQLite
+Python Libraries: sqlite3, datetime, werkzeug.security, Flask session management
+
+System Architecture
+Admin → Flask Application ← Staff
+↑
+↓
+Users
+↓
+SQLite Database
+
+Database Design (ER Diagram)
+Tables:
+
+Users (id, name, email, password, role, status)
+
+Treks (id, trek_name, location, difficulty, duration, slots, staff_id, status, start_date, end_date)
+
+Bookings (id, user_id, trek_id, booking_date, status)
+
+Relationships:
+
+Users (1) → (M) Bookings
+
+Treks (1) → (M) Bookings
+
+Staff (subset of Users) (1) → (M) Treks
+
+Authentication Module
+
+User Registration: Trekkers can register securely.
+
+Staff Registration: Requires Admin approval.
+
+Login System: Role-based login with session management.
+
+Admin Account: Pre-created in database.
+
+Admin Functionalities
+
+Dashboard: Statistics on treks, users, staff, bookings.
+
+Trek Management: Add, edit, delete, view treks.
+
+Staff Management: Approve/reject staff, assign staff to treks.
+
+User Management: View/search users, blacklist users.
+
+Search Functionality: Search treks, staff, users by name or ID.
+
+Trek Staff Functionalities
+
+Dashboard: Assigned treks, registration count, trek status.
+
+Trek Management: Update slots, change trek status (Open, Closed, Started, Completed).
+
+Participant Management: View participant list, monitor bookings.
+
+User Functionalities
+
+Dashboard: Available treks, booked treks, trek status, trek history.
+
+Trek Search: Search by trek name, location, difficulty.
+
+Trek Booking: Book available treks, cancel bookings.
+
+Profile Management: View/edit profile.
+
+Trek History: View past treks, completed treks, cancelled bookings.
+
+Core Business Rules
+Overbooking Prevention:
+If Available Slots > 0 → Allow Booking
+If Available Slots = 0 → Reject Booking
+
+Trek Status Validation:
+Booking allowed only if Status = Open
+
+Staff Access Validation:
+Only assigned staff can modify trek details or view participants.
+
+Additional Features
+
+Admin Statistics Dashboard
+
+User and Trek Search
+
+Profile Editing
+
+Blacklisting Module
+
+Participant Tracking
+
+Application Screens (Placeholders)
+
+Login Page
+
+Registration Page
+
+Admin Dashboard
+
+Staff Dashboard
+
+User Dashboard
+
+API Resources (Optional)
+Examples:
+GET    /treks
+GET    /users
+GET    /bookings
+POST   /book_trek
+POST   /add_trek
+POST   /approve_staff
+
+Testing Performed
+Test Cases:
+
+User Registration
+
+Staff Registration
+
+Staff Approval
+
+Login Authentication
+
+Create/Edit/Delete Trek
+
+Search Trek/User
+
+Book Trek
+
+Prevent Overbooking
+
+Blacklist User
+
+Assign Staff
+
+View History
+
+AI / LLM Declaration
+AI tools were used for:
+
+Code assistance
+
+Debugging support
+
+HTML/CSS improvement
+
+Flask route development
+
+Project documentation generation
+
+Design, implementation, testing, database creation, integration, and understanding of functionality were completed and verified by the student.
+
+Conclusion
+The Trekking Management Application provides a centralized platform for managing trekking activities. It achieves all major requirements including authentication, trek management, staff approval, booking management, search functionality, profile management, and role-based access control. The application improves operational efficiency, reduces manual work, prevents overbooking, and offers a user-friendly experience for administrators, trekking staff, and trekkers.
+
+References
+
+AllTrails (https://www.alltrails.com/)
+
+Meetup (https://www.meetup.com/)
+
+Thrillophilia (https://www.thrillophilia.com/)
+
+Attachments
+
+Drive Link for Presentation Video: [Add Link Here]
