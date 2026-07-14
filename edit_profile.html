@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Profile</title>
+
+    <style>
+
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f7fb;
+        }
+
+        h2{
+            text-align:center;
+            color:#2c3e50;
+        }
+
+        form{
+            width:400px;
+            margin:auto;
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0px 2px 8px rgba(0,0,0,0.1);
+        }
+
+        input{
+            width:95%;
+            padding:10px;
+            margin-top:5px;
+            border:1px solid #ccc;
+            border-radius:5px;
+        }
+
+        button{
+            background:#3498db;
+            color:white;
+            border:none;
+            padding:10px 15px;
+            border-radius:5px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#2980b9;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h2>Edit Profile</h2>
+
+<form method="POST">
+
+    <label>Name</label>
+    <br>
+
+    <input
+        type="text"
+        name="name"
+        value="{{ user.name }}"
+        required>
+
+    <br><br>
+
+    <label>Email</label>
+    <br>
+
+    <input
+        type="email"
+        name="email"
+        value="{{ user.email }}"
+        required>
+
+    <br><br>
+
+    <button type="submit">
+        Update Profile
+    </button>
+
+</form>
+
+</body>
+</html>
